@@ -3,13 +3,13 @@ trigger:
 
 strategy:
   matrix:
-    linux:
+    jdk10_linux:
       imageName: "ubuntu-latest"
-    mac:
-      imageName: "macOS-latest"
-    windows:
+      jdkVersion: "1.10"
+    jdk11_windows:
       imageName: "windows-latest"
-  maxParallel: 3
+      jdkVersion: "1.11"
+  maxParallel: 2
 
 pool:
   vmImage: $(imageName)
@@ -21,7 +21,7 @@ steps:
     publishJUnitResults: false
     codeCoverageToolOption: 'JaCoCo'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
+    jdkVersionOption: $(jdkVersion)
     mavenVersionOption: 'Default'
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
